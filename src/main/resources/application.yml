@@ -1,0 +1,45 @@
+spring:
+  # Datasource
+  datasource:
+    url: jdbc
+    driver-class-name: com.mysql.jdbc.Driver
+    username:
+    password:
+
+  # JPA / Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        naming:
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  # Liquibase
+  liquibase:
+    enabled: true
+    change-log: db.changelog/changelog-master.yaml
+
+# Hibernate SQL logging
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+
+# Monitoring
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include:
+          - "prometheus"
+          - "health"
+        exclude: "shutdown"
+  endpoint:
+    health:
+      show-components: always

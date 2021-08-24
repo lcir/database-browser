@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: lcir
+      changes:
+        - sqlFile:
+            path: changeset/tables-sequences.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 2
+      author: lcir
+      changes:
+        - sqlFile:
+            path: changeset/initial-data.sql
+            relativeToChangelogFile: true
