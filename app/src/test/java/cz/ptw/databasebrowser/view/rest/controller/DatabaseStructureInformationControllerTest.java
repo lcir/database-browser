@@ -4,6 +4,7 @@ import cz.ptw.databasebrowser.model.Connection;
 import cz.ptw.databasebrowser.model.DatabaseType;
 import cz.ptw.databasebrowser.view.rest.repository.ConnectionRestRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,25 +50,29 @@ class DatabaseStructureInformationControllerTest {
     }
 
     @Test
-    void showSchemas() throws Exception {
+    @DisplayName("Should show Schemas In Database when connectionId Is Provided")
+    void should_showSchemasInDatabase_when_connectionIdIsProvided() throws Exception {
         this.mockMvc.perform(get("/api/v1/connections/%d/schema".formatted(connection.getId())))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void showTablesInSchema()  throws Exception {
+    @DisplayName("Should show Tables In Schema when connectionId And Schema Is Provided")
+    void should_showTablesInSchema_when_connectionIdAndSchemaIsProvided()  throws Exception {
         this.mockMvc.perform(get("/api/v1/connections/%d/schema/%s/table".formatted(connection.getId(), connection.getDatabaseName())))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void showColumnsInTable() throws Exception  {
+    @DisplayName("Should show Columns In Tables when connectionId And Schema And Table Is Provided")
+    void should_showColumnsInTables_when_connectionIdAndSchemaAndTableIsProvided() throws Exception  {
         this.mockMvc.perform(get("/api/v1/connections/%d/schema/%s/table/%s/column".formatted(connection.getId(), connection.getDatabaseName(), "TABLES")))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void showExampleOfTableData() throws Exception  {
+    @DisplayName("Should show Table Data Example when connectionId And Schema And Table Is Provided")
+    void should_showTableDataExample_when_connectionIdAndSchemaAndTableIsProvided() throws Exception  {
         this.mockMvc.perform(get("/api/v1/connections/%d/schema/%s/table/%s/example".formatted(connection.getId(), connection.getDatabaseName(), "TABLES")))
                 .andExpect(status().isOk());
     }

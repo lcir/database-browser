@@ -21,7 +21,7 @@ public class PostgreDatabaseConfigurationDriver implements DatabaseConfiguration
 
     @Override
     public String getListAllTablesQuery(final String schema) {
-        return "SELECT * FROM pg_catalog.pg_tables;";
+        return "SELECT * FROM pg_catalog.pg_tables WHERE schemaname = '%s';".formatted(schema);
     }
 
     @Override
