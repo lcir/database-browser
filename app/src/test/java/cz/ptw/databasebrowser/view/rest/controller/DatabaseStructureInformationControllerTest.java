@@ -57,6 +57,13 @@ class DatabaseStructureInformationControllerTest {
     }
 
     @Test
+    @DisplayName("Should return Error Code Not Found When Connection Id Is Wrong.")
+    void should_returnErrorCodeNotFoundWhenConnectionIdIsWrong() throws Exception {
+        this.mockMvc.perform(get("/api/v1/connections/%d/schema".formatted(-1)))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     @DisplayName("Should show Tables In Schema when connectionId And Schema Is Provided")
     void should_showTablesInSchema_when_connectionIdAndSchemaIsProvided()  throws Exception {
         this.mockMvc.perform(get("/api/v1/connections/%d/schema/%s/table".formatted(connection.getId(), connection.getDatabaseName())))
