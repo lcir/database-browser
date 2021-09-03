@@ -4,10 +4,10 @@ databaseChangeLog:
       author: lcir
       changes:
         - sqlFile:
-            path: changeset/tables-sequences.sql
+            path: changeset/initial-create.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 2
+      id: k
       author: lcir
       changes:
         - sqlFile:
