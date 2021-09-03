@@ -37,7 +37,6 @@ public class DatabaseStructureInformationController {
         return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.ACCEPTED);
     }
 
-
     @GetMapping(value = "/{connectionId}/schema/{schema}/table/{table}/column", produces = "application/json")
     public ResponseEntity<List<Map<String, Object>>> showColumnsInTable(
             @PathVariable("connectionId") Integer connectionId,

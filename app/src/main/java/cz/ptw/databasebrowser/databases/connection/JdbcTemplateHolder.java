@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * Connection holder interface
+ * It is mechanism for saving opened JdbcTemplates in memory.
+ * Maybe may be replaced by cache.
  */
 public interface JdbcTemplateHolder {
 

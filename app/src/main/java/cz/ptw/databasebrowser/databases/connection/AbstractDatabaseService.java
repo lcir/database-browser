@@ -15,6 +15,10 @@ import java.sql.Driver;
 import java.util.Map;
 import java.util.function.Supplier;
 
+/**
+ * Abstract class for operations with JdbcHolder. This abstract should implement every service for accessing data
+ * from managed connections.
+ */
 @Slf4j
 @RequiredArgsConstructor
 public abstract class AbstractDatabaseService {
@@ -23,6 +27,12 @@ public abstract class AbstractDatabaseService {
     private final ConnectionRestRepository connectionRestRepository;
     protected final Map<String, DatabaseConfigurationDriver> drivers;
 
+    /**
+     * Method returns initialized JDBC template for connection ID
+     *
+     * @param connectionId Connection id -> primary key of Connection structure in db.
+     * @return Initialized JDBC template for fetched connection.
+     */
     protected JdbcTemplate getJdbcTemplate(final Integer connectionId) {
         try {
             return this.connectionHolder.getJdbcTemplate(connectionId);
@@ -33,6 +43,14 @@ public abstract class AbstractDatabaseService {
         return this.connectionHolder.getJdbcTemplate(connectionId);
     }
 
+    /**
+     * Method gets "DatabaseConfigurationDriver" that is bean with database query implementations. This method finds
+     * the One of these drivers. For example, if in connection is configured mysql db, method returns mysql
+     * driver implementation.
+     *
+     * @param connectionId Connection id -> primary key of Connection structure in db.
+     * @return DatabaseConfigurationDriver of right type of db implementation
+     */
     protected DatabaseConfigurationDriver getDatabaseConfigurationDriver(final Integer connectionId) {
         return drivers.get(this.getDatabaseType(connectionId).name());
     }
