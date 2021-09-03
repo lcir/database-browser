@@ -1,6 +1,7 @@
 package cz.ptw.databasebrowser.view.rest;
 
 import org.junit.Rule;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,30 +9,28 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.testcontainers.containers.MySQLContainer;
 
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Test for integration testing of endpoint for CRUD connections operations.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ConnectionsControllerTest {
 
+    @Rule
+    private final MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0.26");
     @Autowired
     private MockMvc mockMvc;
-    @Rule
-    private MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0.26");
-
-
 
     @Test
-    public void whenTestApp_thenEmptyResponse() throws Exception {
+    @DisplayName("Should return Ok State when get On List Endpoint.")
+    public void should_returnOkState_when_getOnListEndpoint() throws Exception {
         this.mockMvc.perform(get("/api/v1/connections/"))
-                .andExpect(status().isOk())
-                .andExpect((ResultMatcher) jsonPath("$[0].firstName", is("Ligza")));
+                .andExpect(status().isOk());
     }
 }
