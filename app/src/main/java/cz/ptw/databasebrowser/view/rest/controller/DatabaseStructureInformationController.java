@@ -25,7 +25,7 @@ public class DatabaseStructureInformationController {
     public ResponseEntity<List<Map<String, Object>>> showSchemas(@PathVariable("connectionId") Integer connectionId) {
         final List<Map<String, Object>> listOfAllSchemaInDatabase = databaseSchemaService.listAllSchemaInDatabase(connectionId);
 
-        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{connectionId}/schema/{schema}/table", produces = "application/json")
@@ -34,7 +34,7 @@ public class DatabaseStructureInformationController {
             @PathVariable("schema") String schemaName) {
         final List<Map<String, Object>> listOfAllSchemaInDatabase = databaseSchemaService.listAllTablesInSchema(connectionId, schemaName);
 
-        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{connectionId}/schema/{schema}/table/{table}/column", produces = "application/json")
@@ -44,7 +44,7 @@ public class DatabaseStructureInformationController {
             @PathVariable("table") String tableName) {
         final List<Map<String, Object>> listOfAllSchemaInDatabase = databaseSchemaService.listAllColumnsInTable(connectionId, schemaName, tableName);
 
-        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{connectionId}/schema/{schema}/table/{table}/example", produces = "application/json")
@@ -54,6 +54,6 @@ public class DatabaseStructureInformationController {
             @PathVariable("table") String tableName) {
         final Map<String, Object> listOfAllSchemaInDatabase = databaseSchemaService.getDataExampleFromTable(connectionId, schemaName, tableName);
 
-        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.OK);
     }
 }

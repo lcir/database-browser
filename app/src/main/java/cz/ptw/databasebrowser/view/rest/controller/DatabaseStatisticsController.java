@@ -25,7 +25,7 @@ public class DatabaseStatisticsController {
     public ResponseEntity<List<Map<String, Object>>> showTableStatistics(@PathVariable("connectionId") Integer connectionId) {
         final List<Map<String, Object>> listOfAllSchemaInDatabase = databaseStatisticsService.listAllStatisticsForTablesQuery(connectionId);
 
-        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{connectionId}/statistics/schema/{schema}/table/{table}/column", produces = "application/json")
@@ -35,6 +35,6 @@ public class DatabaseStatisticsController {
             @PathVariable("table") String table) {
         final List<Map<String, Object>> listOfAllSchemaInDatabase = databaseStatisticsService.listAllStatisticsForTableColumnsQuery(connectionId, schema, table);
 
-        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listOfAllSchemaInDatabase, HttpStatus.OK);
     }
 }
