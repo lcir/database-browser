@@ -11,7 +11,7 @@ public class MysqlDatabaseConfigurationDriver implements DatabaseConfigurationDr
 
     @Override
     public String getDatabaseDriverName() {
-        return "com.mysql.jdbc.Driver";
+        return "com.mysql.cj.jdbc.Driver";
     }
 
     @Override
