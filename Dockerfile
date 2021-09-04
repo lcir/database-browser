@@ -7,7 +7,7 @@ COPY ./ /app
 RUN gradle clean
 RUN gradle build -x test
 
-RUN java -Djarmode=layertools -jar /app/app/build/libs/*.jar extract
+RUN java -Djarmode=layertools -jar /app/app.database-browser/build/libs/*.jar extract
 FROM openjdk:16-slim
 VOLUME /tmp
 

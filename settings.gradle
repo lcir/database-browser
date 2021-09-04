@@ -1,6 +1,6 @@
 rootProject.name = 'database-browser'
 
-include('app')
+include('app.database-browser')
 include('lib.database-browser-core')
 include('lib.database-browser-mysql')
 include('lib.database-browser-postgresql')
