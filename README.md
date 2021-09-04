@@ -150,8 +150,8 @@ All response data are not structured. They may have different shapes for every k
 {
     "schema_name": "String",
     "table_name": "String",
-    "items": "Number - Number of items in table",
-    "columns": "Number - Number of columns in table"
+    "items": "Number - Number of items in the table",
+    "columns": "Number - Number of columns in the table"
   }
 ```
 
@@ -196,8 +196,8 @@ For every column in table called functions `avg`, `min` and `max`.
 {
     "schema_name": "String",
     "table_name": "String",
-    "items": "String - byte size of table", 
-    "columns": "Number - Number of columns in table"
+    "items": "String - byte size of the table", 
+    "columns": "Number - Number of columns in the table"
   }
 ```
 
@@ -229,9 +229,11 @@ For every column in table called functions `avg`, `min` and `max`.
 ### Test data
 In application are prepared three testing `Connection` entity. This testing connections are there for easy testing of the application.
 
-|ID|Hostname |Port|Database|User|Password|
-|--|---------|----|--------|----|--------|
-| 1|localhost|3306|test    |root|test    |
+|ID|Type      |Hostname |Port|Database|User|Password|Description|
+|--|----------|---------|----|--------|----|--------|-----------|
+| 1|MySQL     |localhost|3306|test    |root|test    |Connection for local testing during development|
+| 2|MySQL     |mysql    |3306|test    |root|test    |Connection for Docker MySQL testing|
+| 3|PostgreSQL|postgre  |5432|test    |test|test    |Connection for Docker PostgreSQL testing|
 
 ### Useful links
 
