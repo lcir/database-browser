@@ -41,7 +41,7 @@ docker-compose build
 For application start is possible use Java runtime and in shell just type
 
 ```shell
-MYSQL_PASS=pass MYSQL_USER=user MYSQL_URL=jdbc:mysql//xxx:3306/db java -jar package-delivery-0.0.1-SNAPSHOT.jar
+MYSQL_PASS=pass MYSQL_USER=user MYSQL_URL=jdbc:mysql//xxx:3306/db java -jar app.database-browser-0.0.1-SNAPSHOT.jar
 ```
 
 There must be provided environment variables for running application:
@@ -57,7 +57,7 @@ The variables are mandatory for application startup.
 Application build by Docker can run in a container.
 
 ```shell
-docker run -it -e MYSQL_PASS=pass -e MYSQL_USER=user -e MYSQL_URL=jdbc:mysql//xxx:3306/db lci/package
+docker run -it -e MYSQL_PASS=pass -e MYSQL_USER=user -e MYSQL_URL=jdbc:mysql//xxx:3306/db lci/database-browser
 ```
 
 or in docker compose.
