@@ -1,11 +1,10 @@
-name: Java Gradle build
+name: Database-Browser build
 
 on: [ push ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 16
@@ -17,3 +16,18 @@ jobs:
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
       - name: Build with Gradle
         run: ./gradlew build
+
+  docker-build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Set up QEMU
+          uses: docker/setup-qemu-action@v1
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v1
+        - name: Build and push
+          id: docker_build
+          uses: docker/build-push-action@v2
+          with:
+            push: false
+            tags: lci/database-browser:latest
