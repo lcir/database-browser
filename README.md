@@ -249,5 +249,6 @@ In application are prepared three testing `Connection` entity. This testing conn
   produce many variations of exceptions.
 * In GitHub actions should be implemented integration testing with external databases.
 * Better Swagger documentation of Exceptions and error codes in REST responses.
-* Improved support for PostgreSQL.
-* Improved statistical endpoints. 
+* Improving support for PostgreSQL.
+* Improving statistical endpoints. 
+* Creation of response types. Unifying of the responses from any kind of the supported database brands. 
