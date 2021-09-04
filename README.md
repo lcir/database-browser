@@ -105,31 +105,31 @@ Connection entity structure - in swagger is documented with validation restricti
 ```
 
 ### Database Structure Information URL
-Endpoints for providing structural information of schema, tables, columns. And also example of table payload.
+Endpoints for providing structural information of the schema, tables, columns. And also an example of the table payload.
 
 Endpoint accept variables:
 * `connectionId` (int) -> ID for `connection` entity
 * `schema` (string) -> Schema name
-* `table` (string) -> table name
+* `table` (string) -> Table name
 
 Endpoint URL options:
-* GET `/api/v1/connections/{connectionId}/schema` -> Get list of all schema in db
-* GET `/api/v1/connections/{connectionId}/schema/{schema}/table` -> Get list of all tables in schema
-* GET `/api/v1/connections/{connectionId}/schema/{schema}/table/{table}/column` -> Get list of all columns in table with information of them
-* GET `/api/v1/connections/{connectionId}/schema/{schema}/table/{table}/example` -> Get example of data in table.
+* GET `/api/v1/connections/{connectionId}/schema` -> Get list of all the schema in db
+* GET `/api/v1/connections/{connectionId}/schema/{schema}/table` -> Get list of all the tables in schema
+* GET `/api/v1/connections/{connectionId}/schema/{schema}/table/{table}/column` -> Get list of all columns in the table with information of them
+* GET `/api/v1/connections/{connectionId}/schema/{schema}/table/{table}/example` -> Get example of the data in table.
 
 All response data are not structured. They may have different shapes for every kind of database.
 
  ### Database Statistics URL
-Endpoints for providing statistic information of tables and columns. 
+Endpoints for providing statistic information of the tables and columns. 
 
 Endpoint accept variables:
 * `connectionId` (int) -> ID for `connection` entity
 * `schema` (string) -> Schema name
-* `table` (string) -> table name
+* `table` (string) -> Table name
 
 Endpoint URL options:
-* GET `/api/v1/connections/{connectionId}/statistics/schema/{schema}/table/{table}/column` -> Get statistic information for every column in table. (In PG is limited) 
+* GET `/api/v1/connections/{connectionId}/statistics/schema/{schema}/table/{table}/column` -> Get statistic information for every column in the table. (In PG is limited) 
 * GET `/api/v1/connections/{connectionId}/statistics/table` -> Get statistic information of table (In PG is limited)
 
 All response data are not structured. They may have different shapes for every kind of database.
