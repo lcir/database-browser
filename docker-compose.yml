@@ -21,3 +21,11 @@ services:
     restart: on-failure
     ports:
       - "8080:8080"
+  database-browser_postgres:
+    image: postgres
+    restart: always
+    hostname: postgre
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+      POSTGRES_USER: test

@@ -37,7 +37,8 @@ public abstract class AbstractDatabaseService {
         try {
             return this.connectionHolder.getJdbcTemplate(connectionId);
         } catch (ConnectionNotFoundInDatabaseException e) {
-            log.error(e.getLocalizedMessage(), e);
+            //Debug for a reason
+            log.debug(e.getLocalizedMessage(), e);
         }
         this.createNewRecordInJdbcHolder(connectionId);
         return this.connectionHolder.getJdbcTemplate(connectionId);
@@ -59,7 +60,8 @@ public abstract class AbstractDatabaseService {
         try {
             return this.connectionHolder.getDatabaseType(connectionId);
         } catch (ConnectionNotFoundInDatabaseException e) {
-            log.error(e.getLocalizedMessage(), e);
+            //Debug for a reason
+            log.debug(e.getLocalizedMessage(), e);
         }
         this.createNewRecordInJdbcHolder(connectionId);
         return this.connectionHolder.getDatabaseType(connectionId);
