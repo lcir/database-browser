@@ -40,5 +40,5 @@ public class JdbcTemplateHolderImpl implements JdbcTemplateHolder {
         ).databasetype();
     }
 
-    record DatabaseMetadataRecord(JdbcTemplate jdbcTemplate, DatabaseType databasetype){};
+    record DatabaseMetadataRecord(JdbcTemplate jdbcTemplate, DatabaseType databasetype){}
 }

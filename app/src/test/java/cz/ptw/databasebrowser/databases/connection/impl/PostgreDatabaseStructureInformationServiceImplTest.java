@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PostgreDatabaseStructureInformationServiceImplTest {
 
     @Container
-    private static PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>("postgres:9.6.12");
+    private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>("postgres:9.6.12");
 
     @Autowired
     private DatabaseStructureInformationService databaseStructureInformationService;

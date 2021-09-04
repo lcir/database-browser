@@ -27,22 +27,22 @@ public class Connection {
 
     @NotNull(message = "Name cannot be null")
     @NotEmpty(message = "Name cannot be empty")
-    @Size(min = 0, max = 255)
+    @Size(max = 255)
     private String name;
     @NotEmpty(message = "Database hostname cannot be empty")
     @NotNull(message = "Database hostname cannot be null")
-    @Size(min = 0, max = 255)
+    @Size(max = 255)
     private String hostname;
     @Min(value = 1, message = "Port value must be more then 0")
     @NotNull(message = "Database port cannot be null")
     private Integer port;
     @NotEmpty(message = "Database Name cannot be empty")
     @NotNull(message = "Database name cannot be null")
-    @Size(min = 0, max = 255)
+    @Size(max = 255)
     private String databaseName;
     @NotEmpty(message = "Database username cannot be empty")
     @NotNull(message = "Database username cannot be null")
-    @Size(min = 0, max = 255)
+    @Size(max = 255)
     private String username;
     @Size(max = 255)
     private String password;
