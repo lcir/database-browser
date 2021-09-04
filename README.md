@@ -226,7 +226,7 @@ For every column in table called functions `avg`, `min` and `max`.
 ```
 For every column in table called functions `avg`, `min` and `max`.
 
-### Test data
+### Testing data
 In application are prepared three testing `Connection` entity. This testing connections are there for easy testing of the application.
 
 |ID|Type      |Hostname |Port|Database|User|Password|Description|
