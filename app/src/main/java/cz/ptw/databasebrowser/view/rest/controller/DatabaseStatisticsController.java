@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController("databaseStatisticsController")
 @RequestMapping("/api/v1/connections")
 @RequiredArgsConstructor
-public class DatabaseStatisticsController {
+public class DatabaseStatisticsController extends AbstractDatabaseController{
 
     private final DatabaseStatisticsService databaseStatisticsService;
 

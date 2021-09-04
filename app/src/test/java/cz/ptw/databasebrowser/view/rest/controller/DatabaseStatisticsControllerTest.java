@@ -50,17 +50,26 @@ class DatabaseStatisticsControllerTest {
     }
 
     @Test
-    @DisplayName("Should return Ok State when get On List Endpoint.")
-    public void should_returnOkState_when_getOnListEndpoint() throws Exception {
+    @DisplayName("Should return Ok State From Table Statistics when ConnectionId Is Provided.")
+    public void should_returnOkStateFromTableStatistics_when_connectionIdIsProvided() throws Exception {
         this.mockMvc.perform(get("/api/v1/connections/%d/statistics/table".formatted(connection.getId())))
                 .andExpect(status().isOk());
     }    
 
     @Test
-    @DisplayName("Should returddn Ok State when get On List Endpoint.")
-    public void should_returdnOkState_when_getOnListEndpoint() throws Exception {
+    @DisplayName("Should return Ok State From Table Column Statistics when ConnectionId Schema And Table Is Provided.")
+    public void should_returnOkStateFromTableColumnStatistics_when_connectionIdSchemaAndTableIsProvided() throws Exception {
         this.mockMvc.perform(get("/api/v1/connections/%d/statistics/schema/%s/table/%s/column".formatted(connection.getId(), connection.getDatabaseName(), "TABLES")))
                 .andExpect(status().isOk());
     }
 
+    @Test
+    @DisplayName("Should return PreCondition Failed when connection To Destination DB Fails.")
+    public void should_returnPreConditionFailed_when_connectionToDestinationDBFails() throws Exception {
+        connection.setUsername("someBody");
+        connection = connectionRestRepository.save(connection);
+
+        this.mockMvc.perform(get("/api/v1/connections/%d/statistics/schema/%s/table/%s/column".formatted(connection.getId(), connection.getDatabaseName(), "TABLES")))
+                .andExpect(status().isPreconditionFailed());
+    }
 }
