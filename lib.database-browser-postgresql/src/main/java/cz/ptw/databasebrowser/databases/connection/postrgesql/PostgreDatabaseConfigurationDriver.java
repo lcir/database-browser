@@ -50,7 +50,7 @@ public class PostgreDatabaseConfigurationDriver implements DatabaseConfiguration
     @Override
     public String getListAllStatisticsForTablesQuery() {
         return """
-                SELECT t.TABLE_SCHEMA as schema_name, t.TABLE_NAME as table_name,  pg_size_pretty(pg_table_size('"'||t.table_schema||'"."'||t.table_name||'"')) as items, count(c.COLUMN_NAME) as size
+                SELECT t.TABLE_SCHEMA as schema_name, t.TABLE_NAME as table_name,  pg_size_pretty(pg_table_size('"'||t.table_schema||'"."'||t.table_name||'"')) as items, count(c.COLUMN_NAME) as columns
                 FROM INFORMATION_SCHEMA.TABLES t
                          , INFORMATION_SCHEMA.COLUMNS c
                 WHERE t.table_name = c.table_name
@@ -63,6 +63,8 @@ public class PostgreDatabaseConfigurationDriver implements DatabaseConfiguration
     public String getListAllStatisticsForTableColumnsQuery(final String schema, final String table, final List<String> columns) {
         return """
                 SELECT %s FROM %s.%s;
-                 """.formatted(columns.stream().map(column -> "min(%s) as min_%s, max(%s) as max_%s".formatted(column, column, column, column)).collect(Collectors.joining(", ")), schema, table);
+                 """.formatted(columns.stream()
+                .map(column -> "min(%s) as min_%s, max(%s) as max_%s".formatted(column, column, column, column))
+                .collect(Collectors.joining(", ")), schema, table);
     }
 }

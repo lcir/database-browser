@@ -46,9 +46,9 @@ MYSQL_PASS=pass MYSQL_USER=user MYSQL_URL=jdbc:mysql//xxx:3306/db java -jar app.
 
 There must be provided environment variables for running application:
 
-* MYSQL_PASS=pass -> Password for application database
-* MYSQL_USER=user -> Username for application database
-* MYSQL_URL=jdbc:mysql//xxx:3306/db -> JDBC url for application database
+* `MYSQL_PASS=pass` -> Password for application database
+* `MYSQL_USER=user` -> Username for application database
+* `MYSQL_URL=jdbc:mysql//xxx:3306/db` -> JDBC url for application database
 
 The variables are mandatory for application startup.
 
@@ -90,7 +90,7 @@ Support of MySQL is better than PostgreSQL.
 * DELETE `/api/v1/connections/{id}` -> DELETE connection with ID
 * PATCH `/api/v1/connections/{id}` -> Save connection with ID
 
-Connection entity structure - in swagger is documented with validation restrictions:
+**Connection entity structure** is in the swagger documented with validation restrictions:
 ```
 {
   databaseName*	  string,
@@ -105,34 +105,133 @@ Connection entity structure - in swagger is documented with validation restricti
 ```
 
 ### Database Structure Information URL
-Endpoints for providing structural information of the schema, tables, columns. And also an example of the table payload.
+Endpoints for providing structural information of the schema, tables, columns. And also an examples of the table payload.
 
-Endpoint accept variables:
+Endpoint variables:
 * `connectionId` (int) -> ID for `connection` entity
 * `schema` (string) -> Schema name
 * `table` (string) -> Table name
 
 Endpoint URL options:
-* GET `/api/v1/connections/{connectionId}/schema` -> Get list of all the schema in db
-* GET `/api/v1/connections/{connectionId}/schema/{schema}/table` -> Get list of all the tables in schema
-* GET `/api/v1/connections/{connectionId}/schema/{schema}/table/{table}/column` -> Get list of all columns in the table with information of them
-* GET `/api/v1/connections/{connectionId}/schema/{schema}/table/{table}/example` -> Get example of the data in table.
+* GET `/api/v1/connections/{connectionId}/schema` -> Gets list of all the schema in db
+* GET `/api/v1/connections/{connectionId}/schema/{schema}/table` -> Gets list of all the tables in schema
+* GET `/api/v1/connections/{connectionId}/schema/{schema}/table/{table}/column` -> Gets list of all columns in the table with information of them
+* GET `/api/v1/connections/{connectionId}/schema/{schema}/table/{table}/example` -> Gets example of the data in table.
 
 All response data are not structured. They may have different shapes for every kind of database.
 
  ### Database Statistics URL
-Endpoints for providing statistic information of the tables and columns. 
+Endpoints for providing statistical information of the tables and columns. 
 
-Endpoint accept variables:
+Endpoint variables:
 * `connectionId` (int) -> ID for `connection` entity
 * `schema` (string) -> Schema name
 * `table` (string) -> Table name
 
 Endpoint URL options:
-* GET `/api/v1/connections/{connectionId}/statistics/schema/{schema}/table/{table}/column` -> Get statistic information for every column in the table. (In PG is limited) 
-* GET `/api/v1/connections/{connectionId}/statistics/table` -> Get statistic information of table (In PG is limited)
+* GET `/api/v1/connections/{connectionId}/statistics/schema/{schema}/table/{table}/column` -> Gets statistic information for every column in the table. (In PG is limited) 
+* GET `/api/v1/connections/{connectionId}/statistics/table` -> Gets statistic information of table (In PG is limited)
 
 All response data are not structured. They may have different shapes for every kind of database.
+
+#### MySQL Response 
+
+**Table statistics:**
+```json
+{
+    "schema_name": "mysql",
+    "table_name": "innodb_table_stats",
+    "items": 5,
+    "columns": 6
+  }
+```
+**Data types of table statistics:**
+```json
+{
+    "schema_name": "String",
+    "table_name": "String",
+    "items": "Number - Number of items in table",
+    "columns": "Number - Number of columns in table"
+  }
+```
+
+**Column statistics:**
+```json
+{
+    "avg_CLUSTERED_INDEX_SIZE": 1,
+    "min_clustered_index_size": 1,
+    "max_clustered_index_size": 1,
+    "avg_DATABASE_NAME": 0,
+    "min_database_name": "mysql",
+    "max_database_name": "test",
+    "avg_LAST_UPDATE": 20210904190686,
+    "min_last_update": "2021-09-04T19:06:52.000+00:00",
+    "max_last_update": "2021-09-04T19:07:08.000+00:00",
+    "avg_N_ROWS": 2,
+    "min_n_rows": 0,
+    "max_n_rows": 6,
+    "avg_SUM_OF_OTHER_INDEX_SIZES": 0,
+    "min_sum_of_other_index_sizes": 0,
+    "max_sum_of_other_index_sizes": 0,
+    "avg_TABLE_NAME": 0,
+    "min_table_name": "DATABASECHANGELOG",
+    "max_table_name": "sys_config"
+}
+```
+For every column in table called functions `avg`, `min` and `max`. 
+
+#### PostgreSQL Response
+
+**Table statistics:**
+```json
+{
+    "schema_name": "information_schema",
+    "table_name": "_pg_foreign_data_wrappers",
+    "items": "0 bytes",
+    "columns": 7
+}
+```
+**Data types of table statistics:**
+```json
+{
+    "schema_name": "String",
+    "table_name": "String",
+    "items": "String - byte size of table", 
+    "columns": "Number - Number of columns in table"
+  }
+```
+
+**Column statistics:**
+```json
+{
+    "min_oid": 10117,
+    "max_oid": 10839,
+    "min_amopfamily": 397,
+    "max_amopfamily": 5067,
+    "min_amoplefttype": 16,
+    "max_amoplefttype": 5069,
+    "min_amoprighttype": 16,
+    "max_amoprighttype": 5069,
+    "min_amopstrategy": 1,
+    "max_amopstrategy": 68,
+    "min_amoppurpose": "o",
+    "max_amoppurpose": "s",
+    "min_amopopr": 15,
+    "max_amopopr": 5076,
+    "min_amopmethod": 403,
+    "max_amopmethod": 4000,
+    "min_amopsortfamily": 0,
+    "max_amopsortfamily": 1970
+}
+```
+For every column in table called functions `avg`, `min` and `max`.
+
+### Test data
+In application are prepared three testing `Connection` entity. This testing connections are there for easy testing of the application.
+
+|ID|Hostname |Port|Database|User|Password|
+|--|---------|----|--------|----|--------|
+| 1|localhost|3306|test    |root|test    |
 
 ### Useful links
 
@@ -148,3 +247,5 @@ All response data are not structured. They may have different shapes for every k
   produce many variations of exceptions.
 * In GitHub actions should be implemented integration testing with external databases.
 * Better Swagger documentation of Exceptions and error codes in REST responses.
+* Improved support for PostgreSQL.
+* Improved statistical endpoints. 

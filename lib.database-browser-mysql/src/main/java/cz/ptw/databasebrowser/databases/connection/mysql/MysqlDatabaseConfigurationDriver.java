@@ -48,7 +48,7 @@ public class MysqlDatabaseConfigurationDriver implements DatabaseConfigurationDr
     @Override
     public String getListAllStatisticsForTablesQuery() {
         return """
-                SELECT t.TABLE_SCHEMA as schema_name, t.TABLE_NAME as table_name, t.TABLE_ROWS as items, count(c.COLUMN_NAME) as size
+                SELECT t.TABLE_SCHEMA as schema_name, t.TABLE_NAME as table_name, t.TABLE_ROWS as items, count(c.COLUMN_NAME) as columns
                 FROM INFORMATION_SCHEMA.TABLES t
                     JOIN INFORMATION_SCHEMA.COLUMNS c
                 WHERE t.table_name = c.table_name
@@ -60,7 +60,9 @@ public class MysqlDatabaseConfigurationDriver implements DatabaseConfigurationDr
     @Override
     public String getListAllStatisticsForTableColumnsQuery(final String schema, final String table, final List<String> columns) {
         return """
-               SELECT %s FROM %s.%s;
-                """.formatted(columns.stream().map(column -> "avg(%s), min(%s), max(%s)".formatted(column, column, column)).collect(Collectors.joining(", ")), schema, table);
+                SELECT %s FROM %s.%s;
+                 """.formatted(columns.stream()
+                .map(column -> "avg(%s) as avg_%S, min(%s) as min_%s, max(%s) as max_%s"
+                        .formatted(column, column, column, column, column, column)).collect(Collectors.joining(", ")), schema, table);
     }
 }
