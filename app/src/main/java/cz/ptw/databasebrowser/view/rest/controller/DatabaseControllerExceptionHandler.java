@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.sql.SQLRecoverableException;
 
-public abstract class AbstractDatabaseController {
+public interface DatabaseControllerExceptionHandler {
 
     @ExceptionHandler({BadSqlGrammarException.class, SQLRecoverableException.class, CannotGetJdbcConnectionException.class, EmptyResultDataAccessException.class})
-    public ResponseEntity<Object> errorHandler(Exception e) {
+    default ResponseEntity<Object> errorHandler(Exception e) {
         if (e instanceof SQLRecoverableException || e instanceof CannotGetJdbcConnectionException)
             return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
 

@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController("databaseStructureInformationController")
 @RequestMapping("/api/v1/connections")
 @RequiredArgsConstructor
-public class DatabaseStructureInformationController extends AbstractDatabaseController {
+public class DatabaseStructureInformationController implements DatabaseControllerExceptionHandler {
 
     private final DatabaseStructureInformationService databaseSchemaService;
 
