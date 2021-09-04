@@ -95,12 +95,12 @@ Connection entity structure - in swagger is documented with validation restricti
 {
   databaseName*	  string,
   databaseType*	  string,
-  hostname*	     string,
+  hostname*	   string,
   id	          integer,
   name*	          string,
-  password	     string,
+  password	   string,
   port*	          integer,
-  username*	     string,
+  username*	   string,
 }
 ```
 
