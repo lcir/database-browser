@@ -252,4 +252,5 @@ In application are prepared three testing `Connection` entity. This testing conn
 * Improving support for PostgreSQL.
 * Improving statistical endpoints. 
 * Creation of response types. Unifying of the responses from any kind of the supported database brands. 
-* Solving median in MySQL and avg + median in PostgreSQL
+* Solving median in MySQL and avg + median in PostgreSQL.
+* Implementation of DGS Netflix GraphQL library.
